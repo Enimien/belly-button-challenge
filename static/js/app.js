@@ -22,7 +22,7 @@ function buildMetadata(sample) {
     // Inside a loop, you will need to use d3 to append new
     // tags for each key-value in the filtered metadata.
     for (let key in result) { 
-      panel.append("h6").text(`${key}: ${result[key]}`);
+      panel.append("h6").text(`${key.toUpperCase()}: ${result[key]}`);
     }
 
   });
@@ -49,10 +49,16 @@ function buildCharts(sample) {
 
     // Build a Bubble Chart
     var layout = { 
-      title: 'Bacteria per sample', 
+      title: 'Bacteria cultures per sample', 
       showlegend: false, 
       height:600, 
-      width:1200 
+      width:1200,
+      xaxis:{
+        title: 'OTU ID'
+      },
+      yaxis:{
+        title: 'Number of Bacteria'
+      } 
 
     };
     var bubblechart = [{ 
@@ -85,6 +91,12 @@ function buildCharts(sample) {
       type: 'bar',
       orientation: 'h'
     }];
+    var  layout = {
+      title: 'Top 10 Bacteria Cultures Found',
+      xaxis: {
+        title: 'Number of Bacteria'
+      }
+    }
 
 
 
@@ -93,7 +105,7 @@ function buildCharts(sample) {
 
 
     // Render the Bar Chart
-    Plotly.newPlot('bar', barchart);
+    Plotly.newPlot('bar', barchart, layout);
 
   });
 }
